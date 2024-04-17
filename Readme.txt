@@ -14,3 +14,5 @@
 ==================================================================
 
 this file is going to be replaced with an md file
+
+third edit: the new file will also contain pics
