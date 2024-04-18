@@ -1,17 +1,17 @@
 #include <stdio.h>
 
 int main() {
-    int a, b;
-    printf("Enter value of a: ");
-    scanf("%d", &a);
-    printf("Enter value of b: ");
-    scanf("%d", &b);
+    float a, b;
+    printf("Enter value of a:");
+    scanf("%f", &a);
+    printf("Enter value of b:");
+    scanf("%f", &b);
 
-    int buffer = a;
+    float buffer = a;
     a = b;
     b = buffer;
 
-    printf("After swapping, value of a = %d\n", a);
-    printf("After swapping, value of b = %d\n", b);
+    printf("After swapping, value of a = %.3f\n", a);
+    printf("After swapping, value of b = %.3f\n", b);
     return 0;
 }
