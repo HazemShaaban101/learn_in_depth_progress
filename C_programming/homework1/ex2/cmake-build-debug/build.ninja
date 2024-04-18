@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C$ programming/homework1/ex2/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C_programming/homework1/ex2/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target ex2
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = C$:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_prog
 
 build cmake_object_order_depends_target_ex2: phony || CMakeFiles/ex2.dir
 
-build CMakeFiles/ex2.dir/main.c.obj: C_COMPILER__ex2_Debug C$:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C$ programming/homework1/ex2/main.c || cmake_object_order_depends_target_ex2
+build CMakeFiles/ex2.dir/main.c.obj: C_COMPILER__ex2_Debug C$:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C_programming/homework1/ex2/main.c || cmake_object_order_depends_target_ex2
   DEP_FILE = CMakeFiles\ex2.dir\main.c.obj.d
   FLAGS = -g -std=gnu90
   OBJECT_DIR = CMakeFiles\ex2.dir
@@ -81,7 +81,7 @@ build ex2.exe: C_EXECUTABLE_LINKER__ex2_Debug CMakeFiles/ex2.dir/main.c.obj
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C programming\homework1\ex2\cmake-build-debug" && C:\CLion2022.1\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C_programming\homework1\ex2\cmake-build-debug && C:\CLion2022.1\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -92,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C programming\homework1\ex2\cmake-build-debug" && C:\CLion2022.1\bin\cmake\win\bin\cmake.exe --regenerate-during-build -S"C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C programming\homework1\ex2" -B"C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C programming\homework1\ex2\cmake-build-debug""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C_programming\homework1\ex2\cmake-build-debug && C:\CLion2022.1\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SC:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C_programming\homework1\ex2 -BC:\Users\Hazem\Desktop\learn_in_depth\learn_in_depth_progress\C_programming\homework1\ex2\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -110,7 +110,7 @@ build ex2: phony ex2.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C programming/homework1/ex2/cmake-build-debug
+# Folder: C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C_programming/homework1/ex2/cmake-build-debug
 
 build all: phony ex2.exe
 

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C programming/homework1/ex2
+# Install script for directory: C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C_programming/homework1/ex2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C programming/homework1/ex2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Hazem/Desktop/learn_in_depth/learn_in_depth_progress/C_programming/homework1/ex2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
