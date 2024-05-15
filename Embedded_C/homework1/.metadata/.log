@@ -289,3 +289,9 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.toolchain 2 2 2024-05-15 20:49:38.522
 !MESSAGE Falling back to default toolchain
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-05-15 20:57:12.345
+!MESSAGE Indexed 'Blinking_led_union_approach' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-05-15 20:57:13.833
+!MESSAGE Indexed 'Blinking_led_union_approach' (2 sources, 52 headers) in 0.307 sec: 1,931 declarations; 2,741 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.043%)
