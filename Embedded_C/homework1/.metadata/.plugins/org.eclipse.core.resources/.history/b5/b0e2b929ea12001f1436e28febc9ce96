@@ -1,0 +1,14 @@
+
+
+/* 			MADE BY: Hazem Shaaban
+ * 			For master embedded systems diploma by keroles shnouda
+ *
+ */
+
+
+
+int main(void)
+{
+    /* Loop forever */
+	for(;;);
+}
