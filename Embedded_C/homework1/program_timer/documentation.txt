@@ -1,0 +1,14 @@
+#################################################################################################
+# this static library is made by hazem shaaban bakry						#
+# as an assignment for learn in depth - master embedded systems siploma by keroles shnouda	#
+#################################################################################################
+
+it uses constructor and destructor attributes (since it was compiled by gcc) to call two functions at start and end of program
+since linker will not add library to text file if no function is called upon, i made a dummy_function() that does nothing other
+than to notify the linker that the library is being used.
+
+to use the library, link it when compiling code, and call on the dummy function anywhere in your main function and VOILA, runtime will
+be printed to console.
+
+i might update the library if i get any better ideas for implimentation.
+
