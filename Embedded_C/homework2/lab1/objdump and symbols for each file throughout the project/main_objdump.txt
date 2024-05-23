@@ -1,0 +1,91 @@
+
+main.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000050  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000084  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000084  2**0
+                  ALLOC
+  3 .rodata       00000030  00000000  00000000  00000084  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .comment      00000012  00000000  00000000  000000b4  2**0
+                  CONTENTS, READONLY
+  5 .ARM.attributes 00000032  00000000  00000000  000000c6  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <PRINT_EXIT_CODE>:
+   0:	e92d4800 	push	{fp, lr}
+   4:	e28db004 	add	fp, sp, #4
+   8:	e24dd008 	sub	sp, sp, #8
+   c:	ebfffffe 	bl	30 <main>
+  10:	e50b0008 	str	r0, [fp, #-8]
+  14:	e59f0010 	ldr	r0, [pc, #16]	; 2c <PRINT_EXIT_CODE+0x2c>
+  18:	ebfffffe 	bl	0 <UART_SEND_STRING>
+  1c:	e51b0008 	ldr	r0, [fp, #-8]
+  20:	ebfffffe 	bl	0 <UART_SEND_INT>
+  24:	e24bd004 	sub	sp, fp, #4
+  28:	e8bd8800 	pop	{fp, pc}
+  2c:	00000000 	andeq	r0, r0, r0
+
+00000030 <main>:
+  30:	e92d4800 	push	{fp, lr}
+  34:	e28db004 	add	fp, sp, #4
+  38:	e59f000c 	ldr	r0, [pc, #12]	; 4c <main+0x1c>
+  3c:	ebfffffe 	bl	0 <UART_SEND_STRING>
+  40:	e3a03000 	mov	r3, #0
+  44:	e1a00003 	mov	r0, r3
+  48:	e8bd8800 	pop	{fp, pc}
+  4c:	0000000c 	andeq	r0, r0, ip
+
+Disassembly of section .rodata:
+
+00000000 <.rodata>:
+   0:	4958450a 	ldmdbmi	r8, {r1, r3, r8, sl, lr}^
+   4:	4f435f54 	svcmi	0x00435f54
+   8:	003a4544 	eorseq	r4, sl, r4, asr #10
+   c:	7261654c 	rsbvc	r6, r1, #76, 10	; 0x13000000
+  10:	6e695f6e 	cdpvs	15, 6, cr5, cr9, cr14, {3}
+  14:	7065645f 	rsbvc	r6, r5, pc, asr r4
+  18:	203a6874 	eorscs	r6, sl, r4, ror r8
+  1c:	657a6148 	ldrbvs	r6, [sl, #-328]!	; 0x148
+  20:	6853206d 	ldmdavs	r3, {r0, r2, r3, r5, r6, sp}^
+  24:	61626161 	cmnvs	r2, r1, ror #2
+  28:	6162206e 	cmnvs	r2, lr, rrx
+  2c:	0079726b 	rsbseq	r7, r9, fp, ror #4
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	; 0x3700
+   4:	4728203a 			; <UNDEFINED> instruction: 0x4728203a
+   8:	2029554e 	eorcs	r5, r9, lr, asr #10
+   c:	2e372e34 	mrccs	14, 1, r2, cr7, cr4, {1}
+  10:	Address 0x00000010 is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003141 	andeq	r3, r0, r1, asr #2
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000027 	andeq	r0, r0, r7, lsr #32
+  10:	4d524105 	ldfmie	f4, [r2, #-20]	; 0xffffffec
+  14:	45363239 	ldrmi	r3, [r6, #-569]!	; 0x239
+  18:	00532d4a 	subseq	r2, r3, sl, asr #26
+  1c:	01080506 	tsteq	r8, r6, lsl #10
+  20:	04120109 	ldreq	r0, [r2], #-265	; 0x109
+  24:	01150114 	tsteq	r5, r4, lsl r1
+  28:	01180317 	tsteq	r8, r7, lsl r3
+  2c:	011a0119 	tsteq	sl, r9, lsl r1
+  30:	Address 0x00000030 is out of bounds.
+
+00000030 T main
+00000000 T PRINT_EXIT_CODE
+         U UART_SEND_INT
+         U UART_SEND_STRING

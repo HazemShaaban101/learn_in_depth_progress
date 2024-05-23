@@ -1,0 +1,16 @@
+This project is made by: Hazem Shaaban Bakry as an assignment for the learn in depth's master embedded systems diploma
+it is a short project that sends string to UART0 in versatilepb which is interfaced with terminal, to print the string to terminal
+
+it the objdump and symbols folder, there is a file for each object and for the final elf, containing Headers, objdump, and the symbols
+we can notice that all the symbols that were marked unresolved (U) in the object files are finally resolved in the elf file after linking
+
+
+
+project notes:
+processor: ARM926ej-s
+board: versatilePB
+system entry point: 0x00010000
+stack offset: 0x1000 from location counter, after location counter is done counting the size of all the sections
+
+
+important notes: this program doesn't start with main, i experimented with a function that calls main, and prints the return code, its not an elegant approach but it was an insightful idea. i now know how the arduino IDE makes two separate functions, one that runs once to initialize peripherals, and the other to loop infinitely
