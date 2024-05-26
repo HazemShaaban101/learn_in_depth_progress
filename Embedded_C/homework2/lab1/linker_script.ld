@@ -1,4 +1,4 @@
-ENTRY(PRINT_EXIT_CODE)
+ENTRY(RESET)
 
 MEMORY
 {
@@ -31,7 +31,7 @@ SECTIONS
 	.bss :
 	{
 		*(.bss)
-	}>MEM
+	}> MEM
 
 	. = . + 0x1000;
 	STACK_TOP = .;
