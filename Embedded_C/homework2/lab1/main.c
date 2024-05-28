@@ -1,4 +1,5 @@
 #include "uart.h"
+int main(void);
 
 void PRINT_EXIT_CODE(void)
 {
