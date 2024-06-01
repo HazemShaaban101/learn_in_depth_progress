@@ -1,0 +1,28 @@
+This universal makefile was made by: Hazem Shaaban Bakry
+i think i will be maintaining it further, adding things along the way to make it much more universal
+
+functionality now include:
+- building object file of any c or assembly file		make <filename>.s/<filename>.c
+- linking all objects using your own linker script		make <project name specified in makefile>.elf
+- extracting bin from elf					make <project name specified in makefile>.bin
+- objdump all object files using -h, -D and nm			make dump_all
+- object dump elf file using -h, -D and nm			make dump_elf
+
+
+things to be checked before using:
+- optimization level
+- debugging level
+- project name
+- cross toolchain name
+- cpu type
+- flags for compiling
+- map file
+
+
+
+
+things to add later:
+- ability to see files in subfolders
+- ability to check if there is a linker script, if not use the toolchain's standard linker settings
+- removing errors for file deletion if the file is not present
+- adding -help command
