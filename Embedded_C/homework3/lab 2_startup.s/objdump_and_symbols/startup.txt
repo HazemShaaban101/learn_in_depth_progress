@@ -1,0 +1,129 @@
+
+startup.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000008  00000000  00000000  00000034  2**1
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  0000003c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  0000003c  2**0
+                  ALLOC
+  3 .Vectors      00000050  00000000  00000000  0000003c  2**0
+                  CONTENTS, RELOC, READONLY
+  4 .debug_line   00000038  00000000  00000000  0000008c  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING, OCTETS
+  5 .debug_info   00000026  00000000  00000000  000000c4  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING, OCTETS
+  6 .debug_abbrev 00000014  00000000  00000000  000000ea  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  7 .debug_aranges 00000020  00000000  00000000  00000100  2**3
+                  CONTENTS, RELOC, READONLY, DEBUGGING, OCTETS
+  8 .debug_str    0000003f  00000000  00000000  00000120  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+  9 .ARM.attributes 00000021  00000000  00000000  0000015f  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <RESET_HANDLER>:
+   0:	f7ff fffe 	bl	0 <main>
+   4:	e7fe      	b.n	4 <RESET_HANDLER+0x4>
+
+00000006 <VECTOR_HANDLER>:
+   6:	e7fb      	b.n	0 <RESET_HANDLER>
+
+Disassembly of section .Vectors:
+
+00000000 <.Vectors>:
+	...
+
+Disassembly of section .debug_line:
+
+00000000 <.debug_line>:
+   0:	00000034 	andeq	r0, r0, r4, lsr r0
+   4:	001d0002 	andseq	r0, sp, r2
+   8:	01020000 	mrseq	r0, (UNDEF: 2)
+   c:	000a0efb 	strdeq	r0, [sl], -fp
+  10:	01010101 	tsteq	r1, r1, lsl #2
+  14:	01000000 	mrseq	r0, (UNDEF: 0)
+  18:	61747300 	cmnvs	r4, r0, lsl #6
+  1c:	70757472 	rsbsvc	r7, r5, r2, ror r4
+  20:	0000732e 	andeq	r7, r0, lr, lsr #6
+  24:	00000000 	andeq	r0, r0, r0
+  28:	00000205 	andeq	r0, r0, r5, lsl #4
+  2c:	2d030000 	stccs	0, cr0, [r3, #-0]
+  30:	02202c01 	eoreq	r2, r0, #256	@ 0x100
+  34:	01010001 	tsteq	r1, r1
+
+Disassembly of section .debug_info:
+
+00000000 <.debug_info>:
+   0:	00000022 	andeq	r0, r0, r2, lsr #32
+   4:	00000002 	andeq	r0, r0, r2
+   8:	01040000 	mrseq	r0, (UNDEF: 4)
+	...
+  14:	00000008 	andeq	r0, r0, r8
+  18:	00000000 	andeq	r0, r0, r0
+  1c:	0000000a 	andeq	r0, r0, sl
+  20:	00000031 	andeq	r0, r0, r1, lsr r0
+  24:	Address 0x24 is out of bounds.
+
+
+Disassembly of section .debug_abbrev:
+
+00000000 <.debug_abbrev>:
+   0:	10001101 	andne	r1, r0, r1, lsl #2
+   4:	12011106 	andne	r1, r1, #-2147483647	@ 0x80000001
+   8:	1b0e0301 	blne	380c14 <VECTOR_HANDLER+0x380c0e>
+   c:	130e250e 	movwne	r2, #58638	@ 0xe50e
+  10:	00000005 	andeq	r0, r0, r5
+
+Disassembly of section .debug_aranges:
+
+00000000 <.debug_aranges>:
+   0:	0000001c 	andeq	r0, r0, ip, lsl r0
+   4:	00000002 	andeq	r0, r0, r2
+   8:	00040000 	andeq	r0, r4, r0
+	...
+  14:	00000008 	andeq	r0, r0, r8
+	...
+
+Disassembly of section .debug_str:
+
+00000000 <.debug_str>:
+   0:	72617473 	rsbvc	r7, r1, #1929379840	@ 0x73000000
+   4:	2e707574 	mrccs	5, 3, r7, cr0, cr4, {3}
+   8:	3a430073 	bcc	10c01dc <VECTOR_HANDLER+0x10c01d6>
+   c:	6573555c 	ldrbvs	r5, [r3, #-1372]!	@ 0xfffffaa4
+  10:	485c7372 	ldmdami	ip, {r1, r4, r5, r6, r8, r9, ip, sp, lr}^
+  14:	6d657a61 	vstmdbvs	r5!, {s15-s111}
+  18:	7365445c 	cmnvc	r5, #92, 8	@ 0x5c000000
+  1c:	706f746b 	rsbvc	r7, pc, fp, ror #8
+  20:	62616c5c 	rsbvs	r6, r1, #92, 24	@ 0x5c00
+  24:	735f3220 	cmpvc	pc, #32, 4
+  28:	74726174 	ldrbtvc	r6, [r2], #-372	@ 0xfffffe8c
+  2c:	732e7075 			@ <UNDEFINED> instruction: 0x732e7075
+  30:	554e4700 	strbpl	r4, [lr, #-1792]	@ 0xfffff900
+  34:	20534120 	subscs	r4, r3, r0, lsr #2
+  38:	31342e32 	teqcc	r4, r2, lsr lr
+  3c:	Address 0x3c is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002041 	andeq	r2, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000016 	andeq	r0, r0, r6, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	@ 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	@ 0xfffffe30
+  18:	0600334d 	streq	r3, [r0], -sp, asr #6
+  1c:	094d070a 	stmdbeq	sp, {r1, r3, r8, r9, sl}^
+  20:	Address 0x20 is out of bounds.
+
+         U _STACK_TOP
+         U main
+00000000 T RESET_HANDLER
+00000006 t VECTOR_HANDLER
