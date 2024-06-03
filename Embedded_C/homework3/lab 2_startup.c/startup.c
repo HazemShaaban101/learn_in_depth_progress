@@ -27,20 +27,20 @@ extern void main(void);
 void RESET_HANDLER(void)
 {
 	// copy data section to ram
-	unsigned int SIZE = (unsigned char *) &_DATA_END - (unsigned char *) &_DATA_START;
+	//unsigned int SIZE = (unsigned char *) &_DATA_END - (unsigned char *) &_DATA_START;			NO LONGER USED
 	unsigned char *SOURCE = (unsigned char *) &_TEXT_END;
 	unsigned char *DESTINATION = (unsigned char *) &_DATA_START;
-	for (int i = 0; i < SIZE; i++)
+	while (DESTINATION < (unsigned char *) &_DATA_END)
 	{
-		*SOURCE = *DESTINATION;
+		*DESTINATION++ = *SOURCE++;
 	}
 	
 	// initialize bss section in ram
-	SIZE = (unsigned char *) &_BSS_END - (unsigned char *) &_BSS_START;
+	//SIZE = (unsigned char *) &_BSS_END - (unsigned char *) &_BSS_START;							NO LONGER USED
 	DESTINATION = (unsigned char *) &_BSS_START;
-	for (int i = 0; i < SIZE; i++)
+	while (DESTINATION < (unsigned char *) &_BSS_END)
 	{
-		*DESTINATION = 0;
+		*DESTINATION++ = 0;
 	}
 	
 	//call main function
