@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/student_database.dir/main.c.o CMakeFiles/student_database.dir/database.c.o  -o student_database 

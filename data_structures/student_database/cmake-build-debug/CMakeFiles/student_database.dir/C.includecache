@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Hazem/Desktop/student_database/database.c
+database.h
+/mnt/c/Users/Hazem/Desktop/student_database/database.h
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+
+/mnt/c/Users/Hazem/Desktop/student_database/database.h
+
