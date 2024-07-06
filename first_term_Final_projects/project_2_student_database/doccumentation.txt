@@ -1,0 +1,45 @@
+/* ===============================================================================================================================================================================================================================*
+ *                  																			code is made by hazem shaaban         											             									  *
+ *      	 									    										 it is submitted as an assignment for 		    																				   	  *
+ *	       										  									 	  learn in depth:mastering embedded systems            																					  *
+ *             																					                                                     																			  *
+ *   										 									 the project works as a student database for a school or university    																			  *
+ *                                                                  																																							  *
+ *    																		  	     any input is appreciated, to learn is to accept criticism.     																			  *
+ *                     		                                    																																								  */
+/*=================================================================================================================================================================================================================================*/
+
+
+program functions:
+1- prompt user to enter a student's data manually.
+
+2- scan a file for input.
+	* the file is predetermined to be named "students.dp" to prevent people from modifying it by mistake since it's not a known format and still needs extra steps to open.
+	* the file is formatted as follows "<roll-number><first-name><last-name><GPA><number-of-registered-courses><course-IDs-separated-by-space>".
+	* the file is saved in the same directory as executable, included is a premade random file in a folder called "student_database_savefile", this file can be used to test cases such as full database, and invalid file data.
+	
+3- find student by their roll number.
+	* since the roll number is unique and no two students can have the same number, this function loops through all of the database until it finds a match and prints it, then it stops.
+	
+4- find student by their first name
+	* since the first name can be repeated, this function loops through all of the database and prints the full name and roll number of all matches.
+	* if no student has a matching first name, print no student found.
+	
+5- find students registered in course.
+	* loop through all students, and for each student loop through all the registered courses and print the student name and roll number of any student registered to the course.
+	* if no students are found, print no students found.
+	
+6- prints info regarding student count and the remaining space in database.
+
+7- delete student using roll number.
+	*if no student with matching roll number is found, print no student found.
+	
+8- update student info using roll number.
+	* find student, then prompt user for the values that can be edited.
+	* user can pick 1 value to change, to cahnge multiple values the function has to be called again.
+	
+9- prints all students in the database.
+
+10- saves the database in an external file, then exits the program.
+	* saves the database in "students.dp" file, overwriting the old one.
+	* the saved file is formatted correctly, so when you open the database again it will read flowlessly without errors.
