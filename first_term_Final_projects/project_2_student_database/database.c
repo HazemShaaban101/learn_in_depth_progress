@@ -428,6 +428,7 @@ DATABASE_STAT_t delete_student()
         student_info[i] = student_info[i + 1];
     }
     student_queue_buffer.count--;
+	student_queue_buffer.head--;
     return student_deleted_successfully;
 }
 
