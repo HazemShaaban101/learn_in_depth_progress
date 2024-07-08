@@ -618,7 +618,7 @@ int is_valid_int(const char * buffer, int length)
 
 // function to check the validity of a string as a name
 // returns 0 if it is valid, and 1 if invalid
-int is_valid_name(const char * buffer, int length)
+int is_valid_name(char * buffer, int length)
 {
     for (int i = 0; i < length; i++)
     {
@@ -628,7 +628,7 @@ int is_valid_name(const char * buffer, int length)
         }
         else
         {
-            tolower(buffer[i]);
+            buffer[i] = tolower(buffer[i]);
         }
     }
     return 0;

@@ -53,7 +53,7 @@ typedef enum
 
 // methods
 int is_valid_float(const char * buffer, int length);
-int is_valid_name(const char * buffer, int length);
+int is_valid_name(char * buffer, int length);
 int is_valid_int(const char * buffer, int length);
 void print_student(int index);
 void buffer_init();
