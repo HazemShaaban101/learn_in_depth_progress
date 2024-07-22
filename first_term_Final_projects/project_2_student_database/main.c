@@ -23,7 +23,7 @@ int main() {
         printf("7. Delete student details using roll number\n");
         printf("8. Update student details using roll number\n");
         printf("9. Show all student information\n");
-        printf("10. Exit\n");
+        printf("10. save and exit\n");
 
         // ask for input and check if input is a valid number
         printf("Enter choice to preform the task:");

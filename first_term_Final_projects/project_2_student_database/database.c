@@ -584,6 +584,7 @@ DATABASE_STAT_t save_and_exit()
         }
         fprintf(output, "\n");
     }
+	fclose(output);
     return data_saved;
 }
 
