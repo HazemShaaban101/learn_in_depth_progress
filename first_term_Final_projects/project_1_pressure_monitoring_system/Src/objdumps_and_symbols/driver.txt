@@ -1,0 +1,155 @@
+
+driver/driver.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000c4  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  000000f8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  000000f8  2**0
+                  ALLOC
+  3 .comment      00000045  00000000  00000000  000000f8  2**0
+                  CONTENTS, READONLY
+  4 .ARM.attributes 0000002d  00000000  00000000  0000013d  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <Delay>:
+   0:	b480      	push	{r7}
+   2:	b083      	sub	sp, #12
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	e002      	b.n	10 <Delay+0x10>
+   a:	687b      	ldr	r3, [r7, #4]
+   c:	3b01      	subs	r3, #1
+   e:	607b      	str	r3, [r7, #4]
+  10:	687b      	ldr	r3, [r7, #4]
+  12:	2b00      	cmp	r3, #0
+  14:	d1f9      	bne.n	a <Delay+0xa>
+  16:	bf00      	nop
+  18:	bf00      	nop
+  1a:	370c      	adds	r7, #12
+  1c:	46bd      	mov	sp, r7
+  1e:	bc80      	pop	{r7}
+  20:	4770      	bx	lr
+
+00000022 <getPressureVal>:
+  22:	b480      	push	{r7}
+  24:	af00      	add	r7, sp, #0
+  26:	4b03      	ldr	r3, [pc, #12]	@ (34 <getPressureVal+0x12>)
+  28:	681b      	ldr	r3, [r3, #0]
+  2a:	b2db      	uxtb	r3, r3
+  2c:	4618      	mov	r0, r3
+  2e:	46bd      	mov	sp, r7
+  30:	bc80      	pop	{r7}
+  32:	4770      	bx	lr
+  34:	40010808 	andmi	r0, r1, r8, lsl #16
+
+00000038 <Set_Alarm_actuator>:
+  38:	b480      	push	{r7}
+  3a:	b083      	sub	sp, #12
+  3c:	af00      	add	r7, sp, #0
+  3e:	6078      	str	r0, [r7, #4]
+  40:	687b      	ldr	r3, [r7, #4]
+  42:	2b01      	cmp	r3, #1
+  44:	d106      	bne.n	54 <Set_Alarm_actuator+0x1c>
+  46:	4b0a      	ldr	r3, [pc, #40]	@ (70 <Set_Alarm_actuator+0x38>)
+  48:	681b      	ldr	r3, [r3, #0]
+  4a:	4a09      	ldr	r2, [pc, #36]	@ (70 <Set_Alarm_actuator+0x38>)
+  4c:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
+  50:	6013      	str	r3, [r2, #0]
+  52:	e008      	b.n	66 <Set_Alarm_actuator+0x2e>
+  54:	687b      	ldr	r3, [r7, #4]
+  56:	2b00      	cmp	r3, #0
+  58:	d105      	bne.n	66 <Set_Alarm_actuator+0x2e>
+  5a:	4b05      	ldr	r3, [pc, #20]	@ (70 <Set_Alarm_actuator+0x38>)
+  5c:	681b      	ldr	r3, [r3, #0]
+  5e:	4a04      	ldr	r2, [pc, #16]	@ (70 <Set_Alarm_actuator+0x38>)
+  60:	f423 5300 	bic.w	r3, r3, #8192	@ 0x2000
+  64:	6013      	str	r3, [r2, #0]
+  66:	bf00      	nop
+  68:	370c      	adds	r7, #12
+  6a:	46bd      	mov	sp, r7
+  6c:	bc80      	pop	{r7}
+  6e:	4770      	bx	lr
+  70:	4001080c 	andmi	r0, r1, ip, lsl #16
+
+00000074 <GPIO_INITIALIZATION>:
+  74:	b480      	push	{r7}
+  76:	af00      	add	r7, sp, #0
+  78:	4b0f      	ldr	r3, [pc, #60]	@ (b8 <GPIO_INITIALIZATION+0x44>)
+  7a:	681b      	ldr	r3, [r3, #0]
+  7c:	4a0e      	ldr	r2, [pc, #56]	@ (b8 <GPIO_INITIALIZATION+0x44>)
+  7e:	f043 0304 	orr.w	r3, r3, #4
+  82:	6013      	str	r3, [r2, #0]
+  84:	4b0d      	ldr	r3, [pc, #52]	@ (bc <GPIO_INITIALIZATION+0x48>)
+  86:	681b      	ldr	r3, [r3, #0]
+  88:	4a0c      	ldr	r2, [pc, #48]	@ (bc <GPIO_INITIALIZATION+0x48>)
+  8a:	f423 0370 	bic.w	r3, r3, #15728640	@ 0xf00000
+  8e:	6013      	str	r3, [r2, #0]
+  90:	4b0a      	ldr	r3, [pc, #40]	@ (bc <GPIO_INITIALIZATION+0x48>)
+  92:	4a0a      	ldr	r2, [pc, #40]	@ (bc <GPIO_INITIALIZATION+0x48>)
+  94:	681b      	ldr	r3, [r3, #0]
+  96:	6013      	str	r3, [r2, #0]
+  98:	4b09      	ldr	r3, [pc, #36]	@ (c0 <GPIO_INITIALIZATION+0x4c>)
+  9a:	681b      	ldr	r3, [r3, #0]
+  9c:	4a08      	ldr	r2, [pc, #32]	@ (c0 <GPIO_INITIALIZATION+0x4c>)
+  9e:	f423 0370 	bic.w	r3, r3, #15728640	@ 0xf00000
+  a2:	6013      	str	r3, [r2, #0]
+  a4:	4b06      	ldr	r3, [pc, #24]	@ (c0 <GPIO_INITIALIZATION+0x4c>)
+  a6:	681b      	ldr	r3, [r3, #0]
+  a8:	4a05      	ldr	r2, [pc, #20]	@ (c0 <GPIO_INITIALIZATION+0x4c>)
+  aa:	f043 3322 	orr.w	r3, r3, #572662306	@ 0x22222222
+  ae:	6013      	str	r3, [r2, #0]
+  b0:	bf00      	nop
+  b2:	46bd      	mov	sp, r7
+  b4:	bc80      	pop	{r7}
+  b6:	4770      	bx	lr
+  b8:	40021018 	andmi	r1, r2, r8, lsl r0
+  bc:	40010800 	andmi	r0, r1, r0, lsl #16
+  c0:	40010804 	andmi	r0, r1, r4, lsl #16
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	@ 0x3700
+   4:	4128203a 			@ <UNDEFINED> instruction: 0x4128203a
+   8:	47206d72 			@ <UNDEFINED> instruction: 0x47206d72
+   c:	5420554e 	strtpl	r5, [r0], #-1358	@ 0xfffffab2
+  10:	636c6f6f 	cmnvs	ip, #444	@ 0x1bc
+  14:	6e696168 	powvsez	f6, f1, #0.0
+  18:	2e333120 	rsfcssp	f3, f3, f0
+  1c:	65722e32 	ldrbvs	r2, [r2, #-3634]!	@ 0xfffff1ce
+  20:	2820316c 	stmdacs	r0!, {r2, r3, r5, r6, r8, ip, sp}
+  24:	6c697542 	cfstr64vs	mvdx7, [r9], #-264	@ 0xfffffef8
+  28:	72612064 	rsbvc	r2, r1, #100	@ 0x64
+  2c:	33312d6d 	teqcc	r1, #6976	@ 0x1b40
+  30:	2929372e 	stmdbcs	r9!, {r1, r2, r3, r5, r8, r9, sl, ip, sp}
+  34:	2e333120 	rsfcssp	f3, f3, f0
+  38:	20312e32 	eorscs	r2, r1, r2, lsr lr
+  3c:	33323032 	teqcc	r2, #50	@ 0x32
+  40:	39303031 	ldmdbcc	r0!, {r0, r4, r5, ip, sp}
+	...
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002c41 	andeq	r2, r0, r1, asr #24
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000022 	andeq	r0, r0, r2, lsr #32
+  10:	4d2d3705 	stcmi	7, cr3, [sp, #-20]!	@ 0xffffffec
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	1202094d 	andne	r0, r2, #1261568	@ 0x134000
+  1c:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+  20:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  24:	1a011901 	bne	46430 <GPIO_INITIALIZATION+0x463bc>
+  28:	22061e01 	andcs	r1, r6, #1, 28
+  2c:	Address 0x2c is out of bounds.
+
+00000000 T Delay
+00000022 T getPressureVal
+00000074 T GPIO_INITIALIZATION
+00000038 T Set_Alarm_actuator

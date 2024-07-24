@@ -1,0 +1,129 @@
+
+pressure_monitoring_system/pressure_monitoring.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000074  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000004  00000000  00000000  000000a8  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, DATA
+  2 .bss          00000008  00000000  00000000  000000ac  2**2
+                  ALLOC
+  3 .rodata       00000004  00000000  00000000  000000ac  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .comment      00000045  00000000  00000000  000000b0  2**0
+                  CONTENTS, READONLY
+  5 .ARM.attributes 0000002d  00000000  00000000  000000f5  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <pressure_sensor_to_pressure_monitoring_comm_func>:
+   0:	b480      	push	{r7}
+   2:	b083      	sub	sp, #12
+   4:	af00      	add	r7, sp, #0
+   6:	6078      	str	r0, [r7, #4]
+   8:	4a09      	ldr	r2, [pc, #36]	@ (30 <pressure_sensor_to_pressure_monitoring_comm_func+0x30>)
+   a:	687b      	ldr	r3, [r7, #4]
+   c:	6013      	str	r3, [r2, #0]
+   e:	4b08      	ldr	r3, [pc, #32]	@ (30 <pressure_sensor_to_pressure_monitoring_comm_func+0x30>)
+  10:	681b      	ldr	r3, [r3, #0]
+  12:	2214      	movs	r2, #20
+  14:	4293      	cmp	r3, r2
+  16:	dd03      	ble.n	20 <pressure_sensor_to_pressure_monitoring_comm_func+0x20>
+  18:	4b06      	ldr	r3, [pc, #24]	@ (34 <pressure_sensor_to_pressure_monitoring_comm_func+0x34>)
+  1a:	4a07      	ldr	r2, [pc, #28]	@ (38 <pressure_sensor_to_pressure_monitoring_comm_func+0x38>)
+  1c:	601a      	str	r2, [r3, #0]
+  1e:	e002      	b.n	26 <pressure_sensor_to_pressure_monitoring_comm_func+0x26>
+  20:	4b04      	ldr	r3, [pc, #16]	@ (34 <pressure_sensor_to_pressure_monitoring_comm_func+0x34>)
+  22:	4a06      	ldr	r2, [pc, #24]	@ (3c <pressure_sensor_to_pressure_monitoring_comm_func+0x3c>)
+  24:	601a      	str	r2, [r3, #0]
+  26:	bf00      	nop
+  28:	370c      	adds	r7, #12
+  2a:	46bd      	mov	sp, r7
+  2c:	bc80      	pop	{r7}
+  2e:	4770      	bx	lr
+	...
+
+00000040 <PM_reading_pressure_func>:
+  40:	b580      	push	{r7, lr}
+  42:	af00      	add	r7, sp, #0
+  44:	4b03      	ldr	r3, [pc, #12]	@ (54 <PM_reading_pressure_func+0x14>)
+  46:	2200      	movs	r2, #0
+  48:	701a      	strb	r2, [r3, #0]
+  4a:	4803      	ldr	r0, [pc, #12]	@ (58 <PM_reading_pressure_func+0x18>)
+  4c:	f7ff fffe 	bl	0 <Delay>
+  50:	bf00      	nop
+  52:	bd80      	pop	{r7, pc}
+  54:	00000000 	andeq	r0, r0, r0
+  58:	000186a0 	andeq	r8, r1, r0, lsr #13
+
+0000005c <PM_high_pressure_detected_func>:
+  5c:	b580      	push	{r7, lr}
+  5e:	af00      	add	r7, sp, #0
+  60:	4b03      	ldr	r3, [pc, #12]	@ (70 <PM_high_pressure_detected_func+0x14>)
+  62:	2201      	movs	r2, #1
+  64:	701a      	strb	r2, [r3, #0]
+  66:	f7ff fffe 	bl	0 <pressure_monitoring_to_LED_controller_comm_func>
+  6a:	bf00      	nop
+  6c:	bd80      	pop	{r7, pc}
+  6e:	bf00      	nop
+  70:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .data:
+
+00000000 <PM_state_ptr>:
+   0:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .rodata:
+
+00000000 <pressure_threshold>:
+   0:	00000014 	andeq	r0, r0, r4, lsl r0
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	@ 0x3700
+   4:	4128203a 			@ <UNDEFINED> instruction: 0x4128203a
+   8:	47206d72 			@ <UNDEFINED> instruction: 0x47206d72
+   c:	5420554e 	strtpl	r5, [r0], #-1358	@ 0xfffffab2
+  10:	636c6f6f 	cmnvs	ip, #444	@ 0x1bc
+  14:	6e696168 	powvsez	f6, f1, #0.0
+  18:	2e333120 	rsfcssp	f3, f3, f0
+  1c:	65722e32 	ldrbvs	r2, [r2, #-3634]!	@ 0xfffff1ce
+  20:	2820316c 	stmdacs	r0!, {r2, r3, r5, r6, r8, ip, sp}
+  24:	6c697542 	cfstr64vs	mvdx7, [r9], #-264	@ 0xfffffef8
+  28:	72612064 	rsbvc	r2, r1, #100	@ 0x64
+  2c:	33312d6d 	teqcc	r1, #6976	@ 0x1b40
+  30:	2929372e 	stmdbcs	r9!, {r1, r2, r3, r5, r8, r9, sl, ip, sp}
+  34:	2e333120 	rsfcssp	f3, f3, f0
+  38:	20312e32 	eorscs	r2, r1, r2, lsr lr
+  3c:	33323032 	teqcc	r2, #50	@ 0x32
+  40:	39303031 	ldmdbcc	r0!, {r0, r4, r5, ip, sp}
+	...
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002c41 	andeq	r2, r0, r1, asr #24
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000022 	andeq	r0, r0, r2, lsr #32
+  10:	4d2d3705 	stcmi	7, cr3, [sp, #-20]!	@ 0xffffffec
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	1202094d 	andne	r0, r2, #1261568	@ 0x134000
+  1c:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+  20:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  24:	1a011901 	bne	46430 <PM_high_pressure_detected_func+0x463d4>
+  28:	22061e01 	andcs	r1, r6, #1, 28
+  2c:	Address 0x2c is out of bounds.
+
+         U Delay
+0000005c T PM_high_pressure_detected_func
+00000040 T PM_reading_pressure_func
+00000000 B PM_state
+00000000 D PM_state_ptr
+         U pressure_monitoring_to_LED_controller_comm_func
+00000004 B pressure_reading
+00000000 T pressure_sensor_to_pressure_monitoring_comm_func
+00000000 R pressure_threshold

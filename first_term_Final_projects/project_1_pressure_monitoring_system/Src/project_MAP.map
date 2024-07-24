@@ -1,0 +1,135 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00020000         xr
+SRAM             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.TEXT           0x08000000      0x290
+ *(.Vectors)
+ .Vectors       0x08000000       0x1c startup.o
+                0x08000000                vector_table
+ *(.text)
+ .text          0x0800001c       0x28 main.o
+                0x0800001c                main
+ .text          0x08000044       0x90 startup.o
+                0x08000044                RESET_handler
+                0x080000c8                HardFault_handler
+                0x080000c8                dummy_function
+                0x080000c8                UsageFault_handler
+                0x080000c8                MEM_fault_handler
+                0x080000c8                BusFault_handler
+                0x080000c8                NMI_handler
+ .text          0x080000d4       0xc4 driver/driver.o
+                0x080000d4                Delay
+                0x080000f6                getPressureVal
+                0x0800010c                Set_Alarm_actuator
+                0x08000148                GPIO_INITIALIZATION
+ .text          0x08000198       0x6c LED_controller/LED_controller.o
+                0x08000198                pressure_monitoring_to_LED_controller_comm_func
+                0x080001b4                LED_off_func
+                0x080001cc                LED_on_func
+ .text          0x08000204       0x74 pressure_monitoring_system/pressure_monitoring.o
+                0x08000204                pressure_sensor_to_pressure_monitoring_comm_func
+                0x08000244                PM_reading_pressure_func
+                0x08000260                PM_high_pressure_detected_func
+ .text          0x08000278       0x14 pressure_sensor/pressure_sensor.o
+                0x08000278                PS_reading_pressure_func
+ *(.rodata)
+ .rodata        0x0800028c        0x4 pressure_monitoring_system/pressure_monitoring.o
+                0x0800028c                pressure_threshold
+                0x08000290                        . = ALIGN (0x4)
+                0x08000290                        _TEXT_END = .
+
+.glue_7         0x08000290        0x0
+ .glue_7        0x08000290        0x0 linker stubs
+
+.glue_7t        0x08000290        0x0
+ .glue_7t       0x08000290        0x0 linker stubs
+
+.vfp11_veneer   0x08000290        0x0
+ .vfp11_veneer  0x08000290        0x0 linker stubs
+
+.v4_bx          0x08000290        0x0
+ .v4_bx         0x08000290        0x0 linker stubs
+
+.iplt           0x08000290        0x0
+ .iplt          0x08000290        0x0 main.o
+
+.igot.plt       0x08000290        0x0
+ .igot.plt      0x08000290        0x0 main.o
+
+.rel.dyn        0x08000290        0x0
+ .rel.iplt      0x08000290        0x0 main.o
+
+.DATA           0x20000000        0xc load address 0x08000290
+                0x20000000                        _DATA_START = .
+ *(.data)
+ .data          0x20000000        0x0 main.o
+ .data          0x20000000        0x0 startup.o
+ .data          0x20000000        0x0 driver/driver.o
+ .data          0x20000000        0x4 LED_controller/LED_controller.o
+                0x20000000                LED_state_ptr
+ .data          0x20000004        0x4 pressure_monitoring_system/pressure_monitoring.o
+                0x20000004                PM_state_ptr
+ .data          0x20000008        0x4 pressure_sensor/pressure_sensor.o
+                0x20000008                PS_state_ptr
+                0x2000000c                        . = ALIGN (0x4)
+                0x2000000c                        _DATA_END = .
+
+.BSS            0x2000000c       0x10 load address 0x0800029c
+                0x2000000c                        _BSS_START = .
+ *(.bss)
+ .bss           0x2000000c        0x0 main.o
+ .bss           0x2000000c        0x0 startup.o
+ .bss           0x2000000c        0x0 driver/driver.o
+ .bss           0x2000000c        0x1 LED_controller/LED_controller.o
+                0x2000000c                LED_state
+ *fill*         0x2000000d        0x3 
+ .bss           0x20000010        0x8 pressure_monitoring_system/pressure_monitoring.o
+                0x20000010                PM_state
+                0x20000014                pressure_reading
+ .bss           0x20000018        0x1 pressure_sensor/pressure_sensor.o
+                0x20000018                PS_state
+                0x2000001c                        . = ALIGN (0x4)
+ *fill*         0x20000019        0x3 
+                0x2000001c                        _BSS_END = .
+                0x2000101c                        _STACK_TOP = (. + 0x1000)
+LOAD main.o
+LOAD startup.o
+LOAD driver/driver.o
+LOAD LED_controller/LED_controller.o
+LOAD pressure_monitoring_system/pressure_monitoring.o
+LOAD pressure_sensor/pressure_sensor.o
+OUTPUT(project1_pressure_monitor.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x00000000       0x44
+ .comment       0x00000000       0x44 main.o
+                                 0x45 (size before relaxing)
+ .comment       0x00000044       0x45 startup.o
+ .comment       0x00000044       0x45 driver/driver.o
+ .comment       0x00000044       0x45 LED_controller/LED_controller.o
+ .comment       0x00000044       0x45 pressure_monitoring_system/pressure_monitoring.o
+ .comment       0x00000044       0x45 pressure_sensor/pressure_sensor.o
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d main.o
+ .ARM.attributes
+                0x0000002d       0x2d startup.o
+ .ARM.attributes
+                0x0000005a       0x2d driver/driver.o
+ .ARM.attributes
+                0x00000087       0x2d LED_controller/LED_controller.o
+ .ARM.attributes
+                0x000000b4       0x2d pressure_monitoring_system/pressure_monitoring.o
+ .ARM.attributes
+                0x000000e1       0x2d pressure_sensor/pressure_sensor.o

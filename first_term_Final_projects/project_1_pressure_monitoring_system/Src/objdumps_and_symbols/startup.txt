@@ -1,0 +1,144 @@
+
+startup.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000090  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  000000c4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  000000c4  2**0
+                  ALLOC
+  3 .Vectors      0000001c  00000000  00000000  000000c4  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, DATA
+  4 .comment      00000045  00000000  00000000  000000e0  2**0
+                  CONTENTS, READONLY
+  5 .ARM.attributes 0000002d  00000000  00000000  00000125  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <RESET_handler>:
+   0:	b580      	push	{r7, lr}
+   2:	b086      	sub	sp, #24
+   4:	af00      	add	r7, sp, #0
+   6:	4b1a      	ldr	r3, [pc, #104]	@ (70 <RESET_handler+0x70>)
+   8:	617b      	str	r3, [r7, #20]
+   a:	4b1a      	ldr	r3, [pc, #104]	@ (74 <RESET_handler+0x74>)
+   c:	613b      	str	r3, [r7, #16]
+   e:	4a1a      	ldr	r2, [pc, #104]	@ (78 <RESET_handler+0x78>)
+  10:	4b18      	ldr	r3, [pc, #96]	@ (74 <RESET_handler+0x74>)
+  12:	1ad3      	subs	r3, r2, r3
+  14:	607b      	str	r3, [r7, #4]
+  16:	2300      	movs	r3, #0
+  18:	60fb      	str	r3, [r7, #12]
+  1a:	e00a      	b.n	32 <RESET_handler+0x32>
+  1c:	697a      	ldr	r2, [r7, #20]
+  1e:	1c53      	adds	r3, r2, #1
+  20:	617b      	str	r3, [r7, #20]
+  22:	693b      	ldr	r3, [r7, #16]
+  24:	1c59      	adds	r1, r3, #1
+  26:	6139      	str	r1, [r7, #16]
+  28:	7812      	ldrb	r2, [r2, #0]
+  2a:	701a      	strb	r2, [r3, #0]
+  2c:	68fb      	ldr	r3, [r7, #12]
+  2e:	3301      	adds	r3, #1
+  30:	60fb      	str	r3, [r7, #12]
+  32:	68fa      	ldr	r2, [r7, #12]
+  34:	687b      	ldr	r3, [r7, #4]
+  36:	429a      	cmp	r2, r3
+  38:	dbf0      	blt.n	1c <RESET_handler+0x1c>
+  3a:	4a10      	ldr	r2, [pc, #64]	@ (7c <RESET_handler+0x7c>)
+  3c:	4b10      	ldr	r3, [pc, #64]	@ (80 <RESET_handler+0x80>)
+  3e:	1ad3      	subs	r3, r2, r3
+  40:	607b      	str	r3, [r7, #4]
+  42:	4b0f      	ldr	r3, [pc, #60]	@ (80 <RESET_handler+0x80>)
+  44:	613b      	str	r3, [r7, #16]
+  46:	2300      	movs	r3, #0
+  48:	60bb      	str	r3, [r7, #8]
+  4a:	e007      	b.n	5c <RESET_handler+0x5c>
+  4c:	693b      	ldr	r3, [r7, #16]
+  4e:	1c5a      	adds	r2, r3, #1
+  50:	613a      	str	r2, [r7, #16]
+  52:	2200      	movs	r2, #0
+  54:	701a      	strb	r2, [r3, #0]
+  56:	68bb      	ldr	r3, [r7, #8]
+  58:	3301      	adds	r3, #1
+  5a:	60bb      	str	r3, [r7, #8]
+  5c:	68ba      	ldr	r2, [r7, #8]
+  5e:	687b      	ldr	r3, [r7, #4]
+  60:	429a      	cmp	r2, r3
+  62:	dbf3      	blt.n	4c <RESET_handler+0x4c>
+  64:	f7ff fffe 	bl	0 <main>
+  68:	bf00      	nop
+  6a:	3718      	adds	r7, #24
+  6c:	46bd      	mov	sp, r7
+  6e:	bd80      	pop	{r7, pc}
+	...
+
+00000084 <dummy_function>:
+  84:	b480      	push	{r7}
+  86:	af00      	add	r7, sp, #0
+  88:	bf00      	nop
+  8a:	46bd      	mov	sp, r7
+  8c:	bc80      	pop	{r7}
+  8e:	4770      	bx	lr
+
+Disassembly of section .Vectors:
+
+00000000 <vector_table>:
+	...
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	@ 0x3700
+   4:	4128203a 			@ <UNDEFINED> instruction: 0x4128203a
+   8:	47206d72 			@ <UNDEFINED> instruction: 0x47206d72
+   c:	5420554e 	strtpl	r5, [r0], #-1358	@ 0xfffffab2
+  10:	636c6f6f 	cmnvs	ip, #444	@ 0x1bc
+  14:	6e696168 	powvsez	f6, f1, #0.0
+  18:	2e333120 	rsfcssp	f3, f3, f0
+  1c:	65722e32 	ldrbvs	r2, [r2, #-3634]!	@ 0xfffff1ce
+  20:	2820316c 	stmdacs	r0!, {r2, r3, r5, r6, r8, ip, sp}
+  24:	6c697542 	cfstr64vs	mvdx7, [r9], #-264	@ 0xfffffef8
+  28:	72612064 	rsbvc	r2, r1, #100	@ 0x64
+  2c:	33312d6d 	teqcc	r1, #6976	@ 0x1b40
+  30:	2929372e 	stmdbcs	r9!, {r1, r2, r3, r5, r8, r9, sl, ip, sp}
+  34:	2e333120 	rsfcssp	f3, f3, f0
+  38:	20312e32 	eorscs	r2, r1, r2, lsr lr
+  3c:	33323032 	teqcc	r2, #50	@ 0x32
+  40:	39303031 	ldmdbcc	r0!, {r0, r4, r5, ip, sp}
+	...
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002c41 	andeq	r2, r0, r1, asr #24
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000022 	andeq	r0, r0, r2, lsr #32
+  10:	4d2d3705 	stcmi	7, cr3, [sp, #-20]!	@ 0xffffffec
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	1202094d 	andne	r0, r2, #1261568	@ 0x134000
+  1c:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+  20:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  24:	1a011901 	bne	46430 <dummy_function+0x463ac>
+  28:	22061e01 	andcs	r1, r6, #1, 28
+  2c:	Address 0x2c is out of bounds.
+
+         U _BSS_END
+         U _BSS_START
+         U _DATA_END
+         U _DATA_START
+         U _STACK_TOP
+         U _TEXT_END
+00000084 W BusFault_handler
+00000084 T dummy_function
+00000084 W HardFault_handler
+         U main
+00000084 W MEM_fault_handler
+00000084 W NMI_handler
+00000000 T RESET_handler
+00000084 W UsageFault_handler
+00000000 D vector_table

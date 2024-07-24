@@ -1,0 +1,115 @@
+
+LED_controller/LED_controller.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000006c  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000004  00000000  00000000  000000a0  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, DATA
+  2 .bss          00000001  00000000  00000000  000000a4  2**0
+                  ALLOC
+  3 .comment      00000045  00000000  00000000  000000a4  2**0
+                  CONTENTS, READONLY
+  4 .ARM.attributes 0000002d  00000000  00000000  000000e9  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <pressure_monitoring_to_LED_controller_comm_func>:
+   0:	b480      	push	{r7}
+   2:	af00      	add	r7, sp, #0
+   4:	4b03      	ldr	r3, [pc, #12]	@ (14 <pressure_monitoring_to_LED_controller_comm_func+0x14>)
+   6:	4a04      	ldr	r2, [pc, #16]	@ (18 <pressure_monitoring_to_LED_controller_comm_func+0x18>)
+   8:	601a      	str	r2, [r3, #0]
+   a:	bf00      	nop
+   c:	46bd      	mov	sp, r7
+   e:	bc80      	pop	{r7}
+  10:	4770      	bx	lr
+  12:	bf00      	nop
+	...
+
+0000001c <LED_off_func>:
+  1c:	b580      	push	{r7, lr}
+  1e:	af00      	add	r7, sp, #0
+  20:	4b03      	ldr	r3, [pc, #12]	@ (30 <LED_off_func+0x14>)
+  22:	2200      	movs	r2, #0
+  24:	701a      	strb	r2, [r3, #0]
+  26:	2000      	movs	r0, #0
+  28:	f7ff fffe 	bl	0 <Set_Alarm_actuator>
+  2c:	bf00      	nop
+  2e:	bd80      	pop	{r7, pc}
+  30:	00000000 	andeq	r0, r0, r0
+
+00000034 <LED_on_func>:
+  34:	b580      	push	{r7, lr}
+  36:	af00      	add	r7, sp, #0
+  38:	4b08      	ldr	r3, [pc, #32]	@ (5c <LED_on_func+0x28>)
+  3a:	2201      	movs	r2, #1
+  3c:	701a      	strb	r2, [r3, #0]
+  3e:	2001      	movs	r0, #1
+  40:	f7ff fffe 	bl	0 <Set_Alarm_actuator>
+  44:	4806      	ldr	r0, [pc, #24]	@ (60 <LED_on_func+0x2c>)
+  46:	f7ff fffe 	bl	0 <Delay>
+  4a:	2000      	movs	r0, #0
+  4c:	f7ff fffe 	bl	0 <Set_Alarm_actuator>
+  50:	4b04      	ldr	r3, [pc, #16]	@ (64 <LED_on_func+0x30>)
+  52:	4a05      	ldr	r2, [pc, #20]	@ (68 <LED_on_func+0x34>)
+  54:	601a      	str	r2, [r3, #0]
+  56:	bf00      	nop
+  58:	bd80      	pop	{r7, pc}
+  5a:	bf00      	nop
+  5c:	00000000 	andeq	r0, r0, r0
+  60:	005b8d80 	subseq	r8, fp, r0, lsl #27
+	...
+
+Disassembly of section .data:
+
+00000000 <LED_state_ptr>:
+   0:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	43434700 	movtmi	r4, #14080	@ 0x3700
+   4:	4128203a 			@ <UNDEFINED> instruction: 0x4128203a
+   8:	47206d72 			@ <UNDEFINED> instruction: 0x47206d72
+   c:	5420554e 	strtpl	r5, [r0], #-1358	@ 0xfffffab2
+  10:	636c6f6f 	cmnvs	ip, #444	@ 0x1bc
+  14:	6e696168 	powvsez	f6, f1, #0.0
+  18:	2e333120 	rsfcssp	f3, f3, f0
+  1c:	65722e32 	ldrbvs	r2, [r2, #-3634]!	@ 0xfffff1ce
+  20:	2820316c 	stmdacs	r0!, {r2, r3, r5, r6, r8, ip, sp}
+  24:	6c697542 	cfstr64vs	mvdx7, [r9], #-264	@ 0xfffffef8
+  28:	72612064 	rsbvc	r2, r1, #100	@ 0x64
+  2c:	33312d6d 	teqcc	r1, #6976	@ 0x1b40
+  30:	2929372e 	stmdbcs	r9!, {r1, r2, r3, r5, r8, r9, sl, ip, sp}
+  34:	2e333120 	rsfcssp	f3, f3, f0
+  38:	20312e32 	eorscs	r2, r1, r2, lsr lr
+  3c:	33323032 	teqcc	r2, #50	@ 0x32
+  40:	39303031 	ldmdbcc	r0!, {r0, r4, r5, ip, sp}
+	...
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002c41 	andeq	r2, r0, r1, asr #24
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000022 	andeq	r0, r0, r2, lsr #32
+  10:	4d2d3705 	stcmi	7, cr3, [sp, #-20]!	@ 0xffffffec
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	1202094d 	andne	r0, r2, #1261568	@ 0x134000
+  1c:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+  20:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  24:	1a011901 	bne	46430 <LED_on_func+0x463fc>
+  28:	22061e01 	andcs	r1, r6, #1, 28
+  2c:	Address 0x2c is out of bounds.
+
+         U Delay
+0000001c T LED_off_func
+00000034 T LED_on_func
+00000000 B LED_state
+00000000 D LED_state_ptr
+00000000 T pressure_monitoring_to_LED_controller_comm_func
+         U Set_Alarm_actuator

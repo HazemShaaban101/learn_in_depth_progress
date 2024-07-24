@@ -1,0 +1,409 @@
+
+project1_pressure_monitor.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .TEXT         00000290  08000000  08000000  00001000  2**2
+                  CONTENTS, ALLOC, LOAD, CODE
+  1 .DATA         0000000c  20000000  08000290  00002000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .BSS          00000010  2000000c  0800029c  0000200c  2**2
+                  ALLOC
+  3 .comment      00000044  00000000  00000000  0000200c  2**0
+                  CONTENTS, READONLY
+  4 .ARM.attributes 0000002d  00000000  00000000  00002050  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .TEXT:
+
+08000000 <vector_table>:
+ 8000000:	2000101c 	andcs	r1, r0, ip, lsl r0
+ 8000004:	08000045 	stmdaeq	r0, {r0, r2, r6}
+ 8000008:	080000c9 	stmdaeq	r0, {r0, r3, r6, r7}
+ 800000c:	080000c9 	stmdaeq	r0, {r0, r3, r6, r7}
+ 8000010:	080000c9 	stmdaeq	r0, {r0, r3, r6, r7}
+ 8000014:	080000c9 	stmdaeq	r0, {r0, r3, r6, r7}
+ 8000018:	080000c9 	stmdaeq	r0, {r0, r3, r6, r7}
+
+0800001c <main>:
+ 800001c:	b580      	push	{r7, lr}
+ 800001e:	af00      	add	r7, sp, #0
+ 8000020:	f000 f892 	bl	8000148 <GPIO_INITIALIZATION>
+ 8000024:	4b04      	ldr	r3, [pc, #16]	@ (8000038 <main+0x1c>)
+ 8000026:	681b      	ldr	r3, [r3, #0]
+ 8000028:	4798      	blx	r3
+ 800002a:	4b04      	ldr	r3, [pc, #16]	@ (800003c <main+0x20>)
+ 800002c:	681b      	ldr	r3, [r3, #0]
+ 800002e:	4798      	blx	r3
+ 8000030:	4b03      	ldr	r3, [pc, #12]	@ (8000040 <main+0x24>)
+ 8000032:	681b      	ldr	r3, [r3, #0]
+ 8000034:	4798      	blx	r3
+ 8000036:	e7f5      	b.n	8000024 <main+0x8>
+ 8000038:	20000008 	andcs	r0, r0, r8
+ 800003c:	20000004 	andcs	r0, r0, r4
+ 8000040:	20000000 	andcs	r0, r0, r0
+
+08000044 <RESET_handler>:
+ 8000044:	b580      	push	{r7, lr}
+ 8000046:	b086      	sub	sp, #24
+ 8000048:	af00      	add	r7, sp, #0
+ 800004a:	4b1a      	ldr	r3, [pc, #104]	@ (80000b4 <RESET_handler+0x70>)
+ 800004c:	617b      	str	r3, [r7, #20]
+ 800004e:	4b1a      	ldr	r3, [pc, #104]	@ (80000b8 <RESET_handler+0x74>)
+ 8000050:	613b      	str	r3, [r7, #16]
+ 8000052:	4a1a      	ldr	r2, [pc, #104]	@ (80000bc <RESET_handler+0x78>)
+ 8000054:	4b18      	ldr	r3, [pc, #96]	@ (80000b8 <RESET_handler+0x74>)
+ 8000056:	1ad3      	subs	r3, r2, r3
+ 8000058:	607b      	str	r3, [r7, #4]
+ 800005a:	2300      	movs	r3, #0
+ 800005c:	60fb      	str	r3, [r7, #12]
+ 800005e:	e00a      	b.n	8000076 <RESET_handler+0x32>
+ 8000060:	697a      	ldr	r2, [r7, #20]
+ 8000062:	1c53      	adds	r3, r2, #1
+ 8000064:	617b      	str	r3, [r7, #20]
+ 8000066:	693b      	ldr	r3, [r7, #16]
+ 8000068:	1c59      	adds	r1, r3, #1
+ 800006a:	6139      	str	r1, [r7, #16]
+ 800006c:	7812      	ldrb	r2, [r2, #0]
+ 800006e:	701a      	strb	r2, [r3, #0]
+ 8000070:	68fb      	ldr	r3, [r7, #12]
+ 8000072:	3301      	adds	r3, #1
+ 8000074:	60fb      	str	r3, [r7, #12]
+ 8000076:	68fa      	ldr	r2, [r7, #12]
+ 8000078:	687b      	ldr	r3, [r7, #4]
+ 800007a:	429a      	cmp	r2, r3
+ 800007c:	dbf0      	blt.n	8000060 <RESET_handler+0x1c>
+ 800007e:	4a10      	ldr	r2, [pc, #64]	@ (80000c0 <RESET_handler+0x7c>)
+ 8000080:	4b10      	ldr	r3, [pc, #64]	@ (80000c4 <RESET_handler+0x80>)
+ 8000082:	1ad3      	subs	r3, r2, r3
+ 8000084:	607b      	str	r3, [r7, #4]
+ 8000086:	4b0f      	ldr	r3, [pc, #60]	@ (80000c4 <RESET_handler+0x80>)
+ 8000088:	613b      	str	r3, [r7, #16]
+ 800008a:	2300      	movs	r3, #0
+ 800008c:	60bb      	str	r3, [r7, #8]
+ 800008e:	e007      	b.n	80000a0 <RESET_handler+0x5c>
+ 8000090:	693b      	ldr	r3, [r7, #16]
+ 8000092:	1c5a      	adds	r2, r3, #1
+ 8000094:	613a      	str	r2, [r7, #16]
+ 8000096:	2200      	movs	r2, #0
+ 8000098:	701a      	strb	r2, [r3, #0]
+ 800009a:	68bb      	ldr	r3, [r7, #8]
+ 800009c:	3301      	adds	r3, #1
+ 800009e:	60bb      	str	r3, [r7, #8]
+ 80000a0:	68ba      	ldr	r2, [r7, #8]
+ 80000a2:	687b      	ldr	r3, [r7, #4]
+ 80000a4:	429a      	cmp	r2, r3
+ 80000a6:	dbf3      	blt.n	8000090 <RESET_handler+0x4c>
+ 80000a8:	f7ff ffb8 	bl	800001c <main>
+ 80000ac:	bf00      	nop
+ 80000ae:	3718      	adds	r7, #24
+ 80000b0:	46bd      	mov	sp, r7
+ 80000b2:	bd80      	pop	{r7, pc}
+ 80000b4:	08000290 	stmdaeq	r0, {r4, r7, r9}
+ 80000b8:	20000000 	andcs	r0, r0, r0
+ 80000bc:	2000000c 	andcs	r0, r0, ip
+ 80000c0:	2000001c 	andcs	r0, r0, ip, lsl r0
+ 80000c4:	2000000c 	andcs	r0, r0, ip
+
+080000c8 <dummy_function>:
+ 80000c8:	b480      	push	{r7}
+ 80000ca:	af00      	add	r7, sp, #0
+ 80000cc:	bf00      	nop
+ 80000ce:	46bd      	mov	sp, r7
+ 80000d0:	bc80      	pop	{r7}
+ 80000d2:	4770      	bx	lr
+
+080000d4 <Delay>:
+ 80000d4:	b480      	push	{r7}
+ 80000d6:	b083      	sub	sp, #12
+ 80000d8:	af00      	add	r7, sp, #0
+ 80000da:	6078      	str	r0, [r7, #4]
+ 80000dc:	e002      	b.n	80000e4 <Delay+0x10>
+ 80000de:	687b      	ldr	r3, [r7, #4]
+ 80000e0:	3b01      	subs	r3, #1
+ 80000e2:	607b      	str	r3, [r7, #4]
+ 80000e4:	687b      	ldr	r3, [r7, #4]
+ 80000e6:	2b00      	cmp	r3, #0
+ 80000e8:	d1f9      	bne.n	80000de <Delay+0xa>
+ 80000ea:	bf00      	nop
+ 80000ec:	bf00      	nop
+ 80000ee:	370c      	adds	r7, #12
+ 80000f0:	46bd      	mov	sp, r7
+ 80000f2:	bc80      	pop	{r7}
+ 80000f4:	4770      	bx	lr
+
+080000f6 <getPressureVal>:
+ 80000f6:	b480      	push	{r7}
+ 80000f8:	af00      	add	r7, sp, #0
+ 80000fa:	4b03      	ldr	r3, [pc, #12]	@ (8000108 <getPressureVal+0x12>)
+ 80000fc:	681b      	ldr	r3, [r3, #0]
+ 80000fe:	b2db      	uxtb	r3, r3
+ 8000100:	4618      	mov	r0, r3
+ 8000102:	46bd      	mov	sp, r7
+ 8000104:	bc80      	pop	{r7}
+ 8000106:	4770      	bx	lr
+ 8000108:	40010808 	andmi	r0, r1, r8, lsl #16
+
+0800010c <Set_Alarm_actuator>:
+ 800010c:	b480      	push	{r7}
+ 800010e:	b083      	sub	sp, #12
+ 8000110:	af00      	add	r7, sp, #0
+ 8000112:	6078      	str	r0, [r7, #4]
+ 8000114:	687b      	ldr	r3, [r7, #4]
+ 8000116:	2b01      	cmp	r3, #1
+ 8000118:	d106      	bne.n	8000128 <Set_Alarm_actuator+0x1c>
+ 800011a:	4b0a      	ldr	r3, [pc, #40]	@ (8000144 <Set_Alarm_actuator+0x38>)
+ 800011c:	681b      	ldr	r3, [r3, #0]
+ 800011e:	4a09      	ldr	r2, [pc, #36]	@ (8000144 <Set_Alarm_actuator+0x38>)
+ 8000120:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
+ 8000124:	6013      	str	r3, [r2, #0]
+ 8000126:	e008      	b.n	800013a <Set_Alarm_actuator+0x2e>
+ 8000128:	687b      	ldr	r3, [r7, #4]
+ 800012a:	2b00      	cmp	r3, #0
+ 800012c:	d105      	bne.n	800013a <Set_Alarm_actuator+0x2e>
+ 800012e:	4b05      	ldr	r3, [pc, #20]	@ (8000144 <Set_Alarm_actuator+0x38>)
+ 8000130:	681b      	ldr	r3, [r3, #0]
+ 8000132:	4a04      	ldr	r2, [pc, #16]	@ (8000144 <Set_Alarm_actuator+0x38>)
+ 8000134:	f423 5300 	bic.w	r3, r3, #8192	@ 0x2000
+ 8000138:	6013      	str	r3, [r2, #0]
+ 800013a:	bf00      	nop
+ 800013c:	370c      	adds	r7, #12
+ 800013e:	46bd      	mov	sp, r7
+ 8000140:	bc80      	pop	{r7}
+ 8000142:	4770      	bx	lr
+ 8000144:	4001080c 	andmi	r0, r1, ip, lsl #16
+
+08000148 <GPIO_INITIALIZATION>:
+ 8000148:	b480      	push	{r7}
+ 800014a:	af00      	add	r7, sp, #0
+ 800014c:	4b0f      	ldr	r3, [pc, #60]	@ (800018c <GPIO_INITIALIZATION+0x44>)
+ 800014e:	681b      	ldr	r3, [r3, #0]
+ 8000150:	4a0e      	ldr	r2, [pc, #56]	@ (800018c <GPIO_INITIALIZATION+0x44>)
+ 8000152:	f043 0304 	orr.w	r3, r3, #4
+ 8000156:	6013      	str	r3, [r2, #0]
+ 8000158:	4b0d      	ldr	r3, [pc, #52]	@ (8000190 <GPIO_INITIALIZATION+0x48>)
+ 800015a:	681b      	ldr	r3, [r3, #0]
+ 800015c:	4a0c      	ldr	r2, [pc, #48]	@ (8000190 <GPIO_INITIALIZATION+0x48>)
+ 800015e:	f423 0370 	bic.w	r3, r3, #15728640	@ 0xf00000
+ 8000162:	6013      	str	r3, [r2, #0]
+ 8000164:	4b0a      	ldr	r3, [pc, #40]	@ (8000190 <GPIO_INITIALIZATION+0x48>)
+ 8000166:	4a0a      	ldr	r2, [pc, #40]	@ (8000190 <GPIO_INITIALIZATION+0x48>)
+ 8000168:	681b      	ldr	r3, [r3, #0]
+ 800016a:	6013      	str	r3, [r2, #0]
+ 800016c:	4b09      	ldr	r3, [pc, #36]	@ (8000194 <GPIO_INITIALIZATION+0x4c>)
+ 800016e:	681b      	ldr	r3, [r3, #0]
+ 8000170:	4a08      	ldr	r2, [pc, #32]	@ (8000194 <GPIO_INITIALIZATION+0x4c>)
+ 8000172:	f423 0370 	bic.w	r3, r3, #15728640	@ 0xf00000
+ 8000176:	6013      	str	r3, [r2, #0]
+ 8000178:	4b06      	ldr	r3, [pc, #24]	@ (8000194 <GPIO_INITIALIZATION+0x4c>)
+ 800017a:	681b      	ldr	r3, [r3, #0]
+ 800017c:	4a05      	ldr	r2, [pc, #20]	@ (8000194 <GPIO_INITIALIZATION+0x4c>)
+ 800017e:	f043 3322 	orr.w	r3, r3, #572662306	@ 0x22222222
+ 8000182:	6013      	str	r3, [r2, #0]
+ 8000184:	bf00      	nop
+ 8000186:	46bd      	mov	sp, r7
+ 8000188:	bc80      	pop	{r7}
+ 800018a:	4770      	bx	lr
+ 800018c:	40021018 	andmi	r1, r2, r8, lsl r0
+ 8000190:	40010800 	andmi	r0, r1, r0, lsl #16
+ 8000194:	40010804 	andmi	r0, r1, r4, lsl #16
+
+08000198 <pressure_monitoring_to_LED_controller_comm_func>:
+ 8000198:	b480      	push	{r7}
+ 800019a:	af00      	add	r7, sp, #0
+ 800019c:	4b03      	ldr	r3, [pc, #12]	@ (80001ac <pressure_monitoring_to_LED_controller_comm_func+0x14>)
+ 800019e:	4a04      	ldr	r2, [pc, #16]	@ (80001b0 <pressure_monitoring_to_LED_controller_comm_func+0x18>)
+ 80001a0:	601a      	str	r2, [r3, #0]
+ 80001a2:	bf00      	nop
+ 80001a4:	46bd      	mov	sp, r7
+ 80001a6:	bc80      	pop	{r7}
+ 80001a8:	4770      	bx	lr
+ 80001aa:	bf00      	nop
+ 80001ac:	20000000 	andcs	r0, r0, r0
+ 80001b0:	080001cd 	stmdaeq	r0, {r0, r2, r3, r6, r7, r8}
+
+080001b4 <LED_off_func>:
+ 80001b4:	b580      	push	{r7, lr}
+ 80001b6:	af00      	add	r7, sp, #0
+ 80001b8:	4b03      	ldr	r3, [pc, #12]	@ (80001c8 <LED_off_func+0x14>)
+ 80001ba:	2200      	movs	r2, #0
+ 80001bc:	701a      	strb	r2, [r3, #0]
+ 80001be:	2000      	movs	r0, #0
+ 80001c0:	f7ff ffa4 	bl	800010c <Set_Alarm_actuator>
+ 80001c4:	bf00      	nop
+ 80001c6:	bd80      	pop	{r7, pc}
+ 80001c8:	2000000c 	andcs	r0, r0, ip
+
+080001cc <LED_on_func>:
+ 80001cc:	b580      	push	{r7, lr}
+ 80001ce:	af00      	add	r7, sp, #0
+ 80001d0:	4b08      	ldr	r3, [pc, #32]	@ (80001f4 <LED_on_func+0x28>)
+ 80001d2:	2201      	movs	r2, #1
+ 80001d4:	701a      	strb	r2, [r3, #0]
+ 80001d6:	2001      	movs	r0, #1
+ 80001d8:	f7ff ff98 	bl	800010c <Set_Alarm_actuator>
+ 80001dc:	4806      	ldr	r0, [pc, #24]	@ (80001f8 <LED_on_func+0x2c>)
+ 80001de:	f7ff ff79 	bl	80000d4 <Delay>
+ 80001e2:	2000      	movs	r0, #0
+ 80001e4:	f7ff ff92 	bl	800010c <Set_Alarm_actuator>
+ 80001e8:	4b04      	ldr	r3, [pc, #16]	@ (80001fc <LED_on_func+0x30>)
+ 80001ea:	4a05      	ldr	r2, [pc, #20]	@ (8000200 <LED_on_func+0x34>)
+ 80001ec:	601a      	str	r2, [r3, #0]
+ 80001ee:	bf00      	nop
+ 80001f0:	bd80      	pop	{r7, pc}
+ 80001f2:	bf00      	nop
+ 80001f4:	2000000c 	andcs	r0, r0, ip
+ 80001f8:	005b8d80 	subseq	r8, fp, r0, lsl #27
+ 80001fc:	20000000 	andcs	r0, r0, r0
+ 8000200:	080001b5 	stmdaeq	r0, {r0, r2, r4, r5, r7, r8}
+
+08000204 <pressure_sensor_to_pressure_monitoring_comm_func>:
+ 8000204:	b480      	push	{r7}
+ 8000206:	b083      	sub	sp, #12
+ 8000208:	af00      	add	r7, sp, #0
+ 800020a:	6078      	str	r0, [r7, #4]
+ 800020c:	4a09      	ldr	r2, [pc, #36]	@ (8000234 <pressure_sensor_to_pressure_monitoring_comm_func+0x30>)
+ 800020e:	687b      	ldr	r3, [r7, #4]
+ 8000210:	6013      	str	r3, [r2, #0]
+ 8000212:	4b08      	ldr	r3, [pc, #32]	@ (8000234 <pressure_sensor_to_pressure_monitoring_comm_func+0x30>)
+ 8000214:	681b      	ldr	r3, [r3, #0]
+ 8000216:	2214      	movs	r2, #20
+ 8000218:	4293      	cmp	r3, r2
+ 800021a:	dd03      	ble.n	8000224 <pressure_sensor_to_pressure_monitoring_comm_func+0x20>
+ 800021c:	4b06      	ldr	r3, [pc, #24]	@ (8000238 <pressure_sensor_to_pressure_monitoring_comm_func+0x34>)
+ 800021e:	4a07      	ldr	r2, [pc, #28]	@ (800023c <pressure_sensor_to_pressure_monitoring_comm_func+0x38>)
+ 8000220:	601a      	str	r2, [r3, #0]
+ 8000222:	e002      	b.n	800022a <pressure_sensor_to_pressure_monitoring_comm_func+0x26>
+ 8000224:	4b04      	ldr	r3, [pc, #16]	@ (8000238 <pressure_sensor_to_pressure_monitoring_comm_func+0x34>)
+ 8000226:	4a06      	ldr	r2, [pc, #24]	@ (8000240 <pressure_sensor_to_pressure_monitoring_comm_func+0x3c>)
+ 8000228:	601a      	str	r2, [r3, #0]
+ 800022a:	bf00      	nop
+ 800022c:	370c      	adds	r7, #12
+ 800022e:	46bd      	mov	sp, r7
+ 8000230:	bc80      	pop	{r7}
+ 8000232:	4770      	bx	lr
+ 8000234:	20000014 	andcs	r0, r0, r4, lsl r0
+ 8000238:	20000004 	andcs	r0, r0, r4
+ 800023c:	08000261 	stmdaeq	r0, {r0, r5, r6, r9}
+ 8000240:	08000245 	stmdaeq	r0, {r0, r2, r6, r9}
+
+08000244 <PM_reading_pressure_func>:
+ 8000244:	b580      	push	{r7, lr}
+ 8000246:	af00      	add	r7, sp, #0
+ 8000248:	4b03      	ldr	r3, [pc, #12]	@ (8000258 <PM_reading_pressure_func+0x14>)
+ 800024a:	2200      	movs	r2, #0
+ 800024c:	701a      	strb	r2, [r3, #0]
+ 800024e:	4803      	ldr	r0, [pc, #12]	@ (800025c <PM_reading_pressure_func+0x18>)
+ 8000250:	f7ff ff40 	bl	80000d4 <Delay>
+ 8000254:	bf00      	nop
+ 8000256:	bd80      	pop	{r7, pc}
+ 8000258:	20000010 	andcs	r0, r0, r0, lsl r0
+ 800025c:	000186a0 	andeq	r8, r1, r0, lsr #13
+
+08000260 <PM_high_pressure_detected_func>:
+ 8000260:	b580      	push	{r7, lr}
+ 8000262:	af00      	add	r7, sp, #0
+ 8000264:	4b03      	ldr	r3, [pc, #12]	@ (8000274 <PM_high_pressure_detected_func+0x14>)
+ 8000266:	2201      	movs	r2, #1
+ 8000268:	701a      	strb	r2, [r3, #0]
+ 800026a:	f7ff ff95 	bl	8000198 <pressure_monitoring_to_LED_controller_comm_func>
+ 800026e:	bf00      	nop
+ 8000270:	bd80      	pop	{r7, pc}
+ 8000272:	bf00      	nop
+ 8000274:	20000010 	andcs	r0, r0, r0, lsl r0
+
+08000278 <PS_reading_pressure_func>:
+ 8000278:	b580      	push	{r7, lr}
+ 800027a:	af00      	add	r7, sp, #0
+ 800027c:	f7ff ff3b 	bl	80000f6 <getPressureVal>
+ 8000280:	4603      	mov	r3, r0
+ 8000282:	4618      	mov	r0, r3
+ 8000284:	f7ff ffbe 	bl	8000204 <pressure_sensor_to_pressure_monitoring_comm_func>
+ 8000288:	bf00      	nop
+ 800028a:	bd80      	pop	{r7, pc}
+
+0800028c <pressure_threshold>:
+ 800028c:	00000014 	andeq	r0, r0, r4, lsl r0
+
+Disassembly of section .DATA:
+
+20000000 <LED_state_ptr>:
+20000000:	080001b5 	stmdaeq	r0, {r0, r2, r4, r5, r7, r8}
+
+20000004 <PM_state_ptr>:
+20000004:	08000245 	stmdaeq	r0, {r0, r2, r6, r9}
+
+20000008 <PS_state_ptr>:
+20000008:	08000279 	stmdaeq	r0, {r0, r3, r4, r5, r6, r9}
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <vector_table-0x6f2f2dc>
+   4:	72412820 	subvc	r2, r1, #32, 16	@ 0x200000
+   8:	4e47206d 	cdpmi	0, 4, cr2, cr7, cr13, {3}
+   c:	6f542055 	svcvs	0x00542055
+  10:	68636c6f 	stmdavs	r3!, {r0, r1, r2, r3, r5, r6, sl, fp, sp, lr}^
+  14:	206e6961 	rsbcs	r6, lr, r1, ror #18
+  18:	322e3331 	eorcc	r3, lr, #-1006632960	@ 0xc4000000
+  1c:	6c65722e 	sfmvs	f7, 2, [r5], #-184	@ 0xffffff48
+  20:	42282031 	eormi	r2, r8, #49	@ 0x31
+  24:	646c6975 	strbtvs	r6, [ip], #-2421	@ 0xfffff68b
+  28:	6d726120 	ldfvse	f6, [r2, #-128]!	@ 0xffffff80
+  2c:	2e33312d 	rsfcssp	f3, f3, #5.0
+  30:	20292937 	eorcs	r2, r9, r7, lsr r9
+  34:	322e3331 	eorcc	r3, lr, #-1006632960	@ 0xc4000000
+  38:	3220312e 	eorcc	r3, r0, #-2147483637	@ 0x8000000b
+  3c:	31333230 	teqcc	r3, r0, lsr r2
+  40:	00393030 	eorseq	r3, r9, r0, lsr r0
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002c41 	andeq	r2, r0, r1, asr #24
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000022 	andeq	r0, r0, r2, lsr #32
+  10:	4d2d3705 	stcmi	7, cr3, [sp, #-20]!	@ 0xffffffec
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	1202094d 	andne	r0, r2, #1261568	@ 0x134000
+  1c:	15011404 	strne	r1, [r1, #-1028]	@ 0xfffffbfc
+  20:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  24:	1a011901 	bne	46430 <vector_table-0x7fb9bd0>
+  28:	22061e01 	andcs	r1, r6, #1, 28
+  2c:	Address 0x2c is out of bounds.
+
+2000001c B _BSS_END
+2000000c B _BSS_START
+2000000c D _DATA_END
+20000000 D _DATA_START
+2000101c B _STACK_TOP
+08000290 T _TEXT_END
+080000c8 W BusFault_handler
+080000d4 T Delay
+080000c8 T dummy_function
+080000f6 T getPressureVal
+08000148 T GPIO_INITIALIZATION
+080000c8 W HardFault_handler
+080001b4 T LED_off_func
+080001cc T LED_on_func
+2000000c B LED_state
+20000000 D LED_state_ptr
+0800001c T main
+080000c8 W MEM_fault_handler
+080000c8 W NMI_handler
+08000260 T PM_high_pressure_detected_func
+08000244 T PM_reading_pressure_func
+20000010 B PM_state
+20000004 D PM_state_ptr
+08000198 T pressure_monitoring_to_LED_controller_comm_func
+20000014 B pressure_reading
+08000204 T pressure_sensor_to_pressure_monitoring_comm_func
+0800028c T pressure_threshold
+08000278 T PS_reading_pressure_func
+20000018 B PS_state
+20000008 D PS_state_ptr
+08000044 T RESET_handler
+0800010c T Set_Alarm_actuator
+080000c8 W UsageFault_handler
+08000000 T vector_table
