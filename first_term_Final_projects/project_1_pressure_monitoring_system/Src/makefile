@@ -107,7 +107,7 @@ dump_all: $(DUMP_FILES)
 
 # create a dump file for project elf file, it contains info header, sections, assembly code, and symbols
 dump_elf:$(PROJECT_NAME).elf objdumps_and_symbols
-	$(CC)readelf -h $< ./objdumps_and_symbols/$(PROJECT_NAME).txt
+	$(CC)readelf -h $< >> ./objdumps_and_symbols/$(PROJECT_NAME).txt
 	$(CC)objdump $(OBJ_DUMP_FLAGS) $< >> ./objdumps_and_symbols/$(PROJECT_NAME).txt
 	$(CC)nm $< >> ./objdumps_and_symbols/$(PROJECT_NAME).txt
 	@echo "=============================info dumped================================"
