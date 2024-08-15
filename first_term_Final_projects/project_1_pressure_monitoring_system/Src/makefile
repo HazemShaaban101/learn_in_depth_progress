@@ -62,7 +62,7 @@ $(PROJECT_NAME).elf:$(C_OBJECTS) $(ASM_OBJECTS)
 #assemble assembly files
 %.o : %.s
 	echo "building "$@
-	$(CC)as -c $(DEBUGGING) $(OPTIMIZATION) $(CFLAGS) $(CPU) %^ -o %@
+	$(CC)as -c $(DEBUGGING) $(OPTIMIZATION) $(CFLAGS) $(CPU) $^ -o $@
 	@echo "======================================================================="
 #################################################################################################################
 
