@@ -2,8 +2,8 @@
  *                  		code is made by hazem shaaban                   		*
  * it is submitted to Learn in depth:Mastering embedded systems as an assignment 	*
  *                                                                					*
- *     			the code calculates the amount of each type of change       		*
- * 			to ensure the customer gets the least amount of coins possible  		*
+ *     			this code turns on 8 LEDs ascendingly and then turns them 			*
+ *									off descindingly								*
  *                                                                  				*
  * 			this might not be the best way to do it, but it does the job     		*
  *                     				for a beginner                             		*
