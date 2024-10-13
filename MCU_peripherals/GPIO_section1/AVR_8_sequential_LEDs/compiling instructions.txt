@@ -1,0 +1,2 @@
+compile using this command in bash
+avr-gcc main.c -I . -mmcu=atmega32 -gdwarf-2 -o 8_sequential_LEDs.elf
