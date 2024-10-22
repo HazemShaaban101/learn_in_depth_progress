@@ -1,0 +1,206 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00020000         xr
+SRAM             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.TEXT           0x08000000      0xec8
+ *(.Vectors)
+ .Vectors       0x08000000       0x1c startup.o
+                0x08000000                vector_table
+                0x00000058                        . = 0x58
+ *fill*         0x0800001c       0x3c 
+ *(.GPIO_ISR)
+ .GPIO_ISR      0x08000058       0x14 startup.o
+                0x08000058                vector_table2
+ *(.text)
+ .text          0x0800006c      0x364 main.o
+                0x0800006c                wait_ms
+                0x080000a6                main
+                0x080001b4                calculator
+                0x08000218                is_number
+                0x08000254                is_operation
+                0x08000288                is_clr_scrn
+                0x080002bc                is_equal
+ .text          0x080003d0       0x90 startup.o
+                0x080003d0                RESET_handler
+                0x08000454                dummy_function
+                0x08000454                HardFault_handler
+                0x08000454                NMI_handler
+                0x08000454                EXTI0_handler
+                0x08000454                EXTI2_handler
+                0x08000454                EXTI3_handler
+                0x08000454                EXTI4_handler
+                0x08000454                UsageFault_handler
+                0x08000454                EXTI1_handler
+                0x08000454                MEM_fault_handler
+                0x08000454                BusFault_handler
+ .text          0x08000460      0x440 GPIO/GPIO.o
+                0x08000460                get_CRHL_shift
+                0x08000502                GPIO_Pin_Init
+                0x0800068e                GPIO_Port_DeInit
+                0x0800074c                GPIO_Pin_Read
+                0x08000778                GPIO_Port_Read
+                0x08000794                GPIO_Pin_Write
+                0x080007dc                GPIO_Port_Write
+                0x080007f8                GPIO_Pin_Output_Speed
+                0x08000878                GPIO_Pin_Toggle
+ .text          0x080008a0      0x400 LCD_drivers/LCD.o
+                0x080008dc                intToStr
+                0x080009c4                set_DataPins_Direction
+                0x08000a3c                LCD_init
+                0x08000ab4                LCD_isbusy
+                0x08000ae4                LCD_kick
+                0x08000b0c                LCD_send_command
+                0x08000b60                LCD_send_character
+                0x08000be4                LCD_send_string
+                0x08000c0e                LCD_clear_display
+                0x08000c28                LCD_send_number
+                0x08000c4e                LCD_goto_XY
+ .text          0x08000ca0      0x1bc numpad_drivers/numpad.o
+                0x08000cda                NUMPAD_init
+                0x08000d88                NUMPAD_read
+ *(.rodata)
+ .rodata        0x08000e5c       0x6a main.o
+                0x08000ec8                        . = ALIGN (0x4)
+ *fill*         0x08000ec6        0x2 
+                0x08000ec8                        _TEXT_END = .
+
+.glue_7         0x08000ec8        0x0
+ .glue_7        0x08000ec8        0x0 linker stubs
+
+.glue_7t        0x08000ec8        0x0
+ .glue_7t       0x08000ec8        0x0 linker stubs
+
+.vfp11_veneer   0x08000ec8        0x0
+ .vfp11_veneer  0x08000ec8        0x0 linker stubs
+
+.v4_bx          0x08000ec8        0x0
+ .v4_bx         0x08000ec8        0x0 linker stubs
+
+.iplt           0x08000ec8        0x0
+ .iplt          0x08000ec8        0x0 main.o
+
+.igot.plt       0x08000ec8        0x0
+ .igot.plt      0x08000ec8        0x0 main.o
+
+.rel.dyn        0x08000ec8        0x0
+ .rel.iplt      0x08000ec8        0x0 main.o
+
+.DATA           0x20000000       0x18 load address 0x08000ec8
+                0x20000000                        _DATA_START = .
+ *(.data)
+ .data          0x20000000        0x4 main.o
+                0x20000000                value_ptr
+ .data          0x20000004        0x0 startup.o
+ .data          0x20000004        0x0 GPIO/GPIO.o
+ .data          0x20000004        0x0 LCD_drivers/LCD.o
+ .data          0x20000004       0x14 numpad_drivers/numpad.o
+                0x20000018                        . = ALIGN (0x4)
+                0x20000018                        _DATA_END = .
+
+.BSS            0x20000018       0x10 load address 0x08000ee0
+                0x20000018                        _BSS_START = .
+ *(.bss)
+ .bss           0x20000018        0x9 main.o
+                0x20000018                first_value
+                0x2000001c                second_value
+                0x20000020                sign
+ .bss           0x20000021        0x0 startup.o
+ .bss           0x20000021        0x0 GPIO/GPIO.o
+ *fill*         0x20000021        0x3 
+ .bss           0x20000024        0x4 LCD_drivers/LCD.o
+ .bss           0x20000028        0x0 numpad_drivers/numpad.o
+                0x20000028                        . = ALIGN (0x4)
+                0x20000028                        _BSS_END = .
+                0x20001028                        _STACK_TOP = (. + 0x1000)
+LOAD main.o
+LOAD startup.o
+LOAD GPIO/GPIO.o
+LOAD LCD_drivers/LCD.o
+LOAD numpad_drivers/numpad.o
+OUTPUT(BLUEPILL_GPIO_lab.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000     0x118e
+ .debug_info    0x00000000      0x47d main.o
+ .debug_info    0x0000047d      0x1d7 startup.o
+ .debug_info    0x00000654      0x46f GPIO/GPIO.o
+ .debug_info    0x00000ac3      0x453 LCD_drivers/LCD.o
+ .debug_info    0x00000f16      0x278 numpad_drivers/numpad.o
+
+.debug_abbrev   0x00000000      0x73c
+ .debug_abbrev  0x00000000      0x19e main.o
+ .debug_abbrev  0x0000019e      0x103 startup.o
+ .debug_abbrev  0x000002a1      0x182 GPIO/GPIO.o
+ .debug_abbrev  0x00000423      0x1ce LCD_drivers/LCD.o
+ .debug_abbrev  0x000005f1      0x14b numpad_drivers/numpad.o
+
+.debug_loc      0x00000000      0x9b6
+ .debug_loc     0x00000000      0x1dc main.o
+ .debug_loc     0x000001dc       0x94 startup.o
+ .debug_loc     0x00000270      0x324 GPIO/GPIO.o
+ .debug_loc     0x00000594      0x34a LCD_drivers/LCD.o
+ .debug_loc     0x000008de       0xd8 numpad_drivers/numpad.o
+
+.debug_aranges  0x00000000       0xa0
+ .debug_aranges
+                0x00000000       0x20 main.o
+ .debug_aranges
+                0x00000020       0x20 startup.o
+ .debug_aranges
+                0x00000040       0x20 GPIO/GPIO.o
+ .debug_aranges
+                0x00000060       0x20 LCD_drivers/LCD.o
+ .debug_aranges
+                0x00000080       0x20 numpad_drivers/numpad.o
+
+.debug_line     0x00000000      0xca8
+ .debug_line    0x00000000      0x277 main.o
+ .debug_line    0x00000277      0x163 startup.o
+ .debug_line    0x000003da      0x3ec GPIO/GPIO.o
+ .debug_line    0x000007c6      0x2df LCD_drivers/LCD.o
+ .debug_line    0x00000aa5      0x203 numpad_drivers/numpad.o
+
+.debug_str      0x00000000      0x43e
+ .debug_str     0x00000000      0x43e main.o
+                                0x2a8 (size before relaxing)
+ .debug_str     0x0000043e      0x1a5 startup.o
+ .debug_str     0x0000043e      0x274 GPIO/GPIO.o
+ .debug_str     0x0000043e      0x295 LCD_drivers/LCD.o
+ .debug_str     0x0000043e      0x1c2 numpad_drivers/numpad.o
+
+.comment        0x00000000       0x44
+ .comment       0x00000000       0x44 main.o
+                                 0x45 (size before relaxing)
+ .comment       0x00000044       0x45 startup.o
+ .comment       0x00000044       0x45 GPIO/GPIO.o
+ .comment       0x00000044       0x45 LCD_drivers/LCD.o
+ .comment       0x00000044       0x45 numpad_drivers/numpad.o
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d main.o
+ .ARM.attributes
+                0x0000002d       0x2d startup.o
+ .ARM.attributes
+                0x0000005a       0x2d GPIO/GPIO.o
+ .ARM.attributes
+                0x00000087       0x2d LCD_drivers/LCD.o
+ .ARM.attributes
+                0x000000b4       0x2d numpad_drivers/numpad.o
+
+.debug_frame    0x00000000      0x4f0
+ .debug_frame   0x00000000       0xfc main.o
+ .debug_frame   0x000000fc       0x54 startup.o
+ .debug_frame   0x00000150      0x178 GPIO/GPIO.o
+ .debug_frame   0x000002c8      0x1b0 LCD_drivers/LCD.o
+ .debug_frame   0x00000478       0x78 numpad_drivers/numpad.o
